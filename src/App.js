@@ -6,14 +6,13 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
+import ShowDocuments from "./components/board-user.component";
 import BoardReviewer from "./components/board-reviewer.component";
 import BoardAdmin from "./components/board-admin.component";
-import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import AddProduct from './screens/AddProduct';
-import EditProduct from './screens/EditProduct';
-import ProductDetail from './screens/ProductDetail';
-import ShowProducts from './screens/ShowProducts'
+import { Switch, Route, Link } from "react-router-dom";
+import AddProduct from "./screens/AddProduct";
+import EditProduct from "./screens/EditProduct";
+import DocumentDetail from "./screens/DocumentDetail";
 
 class App extends Component {
   constructor(props) {
@@ -53,32 +52,39 @@ class App extends Component {
               </Link>
             </li>
             {showReviewerBoard && (
-              <li className="nav-item">
+            <div className="navbar-nav ml-auto">
+                <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
-                Reviewer Board
-                </Link>
-              </li>
-            )}
-            {showAdminBoard && (
-              <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
+                  Reviewer Board
                 </Link>
               </li>
               <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Add User
+              <Link to={"/addDocument"} className="nav-link">
+                Add Document
               </Link>
             </li>
             </div>
             )}
+            {showAdminBoard && (
+              <div className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to={"/admin"} className="nav-link">
+                    Admin Board
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                    Add User
+                  </Link>
+                </li>
+              </div>
+            )}
             {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
+                <li className="nav-item">
+                  <Link to={"/user"} className="nav-link">
+                    Dashboard
+                  </Link>
+                </li>
             )}
           </div>
           {currentUser ? (
@@ -101,26 +107,22 @@ class App extends Component {
                   Login
                 </Link>
               </li>
-              
             </div>
           )}
         </nav>
         <div className="container mt-3">
-          <Router>
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
+            <Route path="/user" component={ShowDocuments} />
             <Route path="/rev" component={BoardReviewer} />
             <Route path="/admin" component={BoardAdmin} />
-            <Route exact path='/addDocument' component={AddProduct} />
-            <Route exact path='/product/edit/:id' component={EditProduct} />
-            <Route exact path='/product/:id' component={ProductDetail} />
-            <Route exact path='/products' component={ShowProducts} />
+            <Route exact path="/addDocument" component={AddProduct} />
+            <Route exact path="/product/edit/:id" component={EditProduct} />
+            <Route exact path="/product/:id" component={DocumentDetail} />
           </Switch>
-          </Router>
         </div>
       </div>
     );

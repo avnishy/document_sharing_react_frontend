@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import axios from 'axios'
 
 
-const ProductDetail = () => {
+const DocumentDetail = () => {
 
     const { id } = useParams()
     const history = useHistory()
@@ -153,16 +153,7 @@ const ProductDetail = () => {
                         
                 </Col>
         </Row>
-
-
-
-                
         </Container>
-
-       
-
-
-
         </>
     )
 }

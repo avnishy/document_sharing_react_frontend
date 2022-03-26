@@ -1,55 +1,43 @@
-import React from 'react'
+import React, { useState, Component } from "react";
+import axios from "axios";
+import { Container, Row, Col } from "react-bootstrap";
+import DocumentCard from "./DocumentCard";
 
-class ShowDocuments extends React.Component {
-
-	// Constructor
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			items: [],
-			DataisLoaded: false
-		};
+export default class ShowDocuments extends Component {
+	constructor(props){
+	super(props)
+	this.state = {
+		documents: []
+	  };
 	}
+	componentDidMount(){
+    axios.get('http://localhost:8080/api/document/alldocuments')
+      .then(res => {
+        this.setState({
+			documents: res.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+render() {
+  return (
+    <>
+      <Container className="justify-content-center p-2">
+        <h1 className="text-center">Show All Documents</h1>
+        <hr />
 
-	// ComponentDidMount is used to
-	// execute the code
-	componentDidMount() {
-		fetch("http://localhost:8080/api/document/alldocuments")
-			.then((res) => res.json())
-			.then((json) => {
-				this.setState({
-					items: json,
-					DataisLoaded: true
-				});
-			})
-	}
-	render() {
-		const { DataisLoaded, items } = this.state;
-		if (!DataisLoaded) return <div>
-			<h1> Pleses wait some time.... </h1> </div> ;
-
-		return (
-		<div className = "App">
-			<h1> Fetch Docs from Backend api </h1> {
-				items.map((item) => (
-				<ol key = { item.id } >
-					<h4>Document ID- { item.id}</h4>
-					Document : { item.document },
-					<br/>
-					Title: { item.title },
-					<br/>
-					Description: { item.description },
-					<br/>
-					published: { item.published},
-					<br/>
-					Download Link: <a href={ item.linkurl }> Click Here</a>
-					</ol>
-				))
-			}
-		</div>
-	);
+        <Row>
+          {this.state.documents.map(document => {
+            return <Col md={6} lg={4} sm={12} key={document.id}>
+                <DocumentCard document={document} />
+              </Col>
+          })
+		  }
+        </Row>
+      </Container>
+    </>
+  );
 }
 }
-
-export default ShowDocuments

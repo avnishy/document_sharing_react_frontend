@@ -17,13 +17,6 @@ const AddProduct = ({ history }) => {
     const addProductHandler = async (e) => {
 
         e.preventDefault()
-
-        // const data = {
-        //     title: title,
-        //     price: price,
-        //     description: description,
-        //     published: published
-        // }
         const user=  AuthService.getCurrentUser();
         const userID = user.id;
 
@@ -33,10 +26,8 @@ const AddProduct = ({ history }) => {
         formData.append('title', title)
         formData.append('description', description)
         formData.append('published', published)
-
         await axios.post(API_URL + `adddocument/${userID}`, formData)
         history.push('/user')
-    
     }
 
 
