@@ -9,7 +9,12 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardReviewer from "./components/board-reviewer.component";
 import BoardAdmin from "./components/board-admin.component";
-import {Switch, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import AddProduct from './screens/AddProduct';
+import EditProduct from './screens/EditProduct';
+import ProductDetail from './screens/ProductDetail';
+import ShowProducts from './screens/ShowProducts'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -55,16 +60,23 @@ class App extends Component {
               </li>
             )}
             {showAdminBoard && (
+              <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
                   Admin Board
                 </Link>
               </li>
+              <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Add User
+              </Link>
+            </li>
+            </div>
             )}
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
-                  User
+                  Dashboard
                 </Link>
               </li>
             )}
@@ -89,15 +101,12 @@ class App extends Component {
                   Login
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
+              
             </div>
           )}
         </nav>
         <div className="container mt-3">
+          <Router>
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
@@ -106,7 +115,12 @@ class App extends Component {
             <Route path="/user" component={BoardUser} />
             <Route path="/rev" component={BoardReviewer} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route exact path='/addDocument' component={AddProduct} />
+            <Route exact path='/product/edit/:id' component={EditProduct} />
+            <Route exact path='/product/:id' component={ProductDetail} />
+            <Route exact path='/products' component={ShowProducts} />
           </Switch>
+          </Router>
         </div>
       </div>
     );

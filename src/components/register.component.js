@@ -40,6 +40,15 @@ const vpassword = value => {
     );
   }
 };
+const vroles = value => {
+  if (value.length < 3 || value.length > 40) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The password must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -47,10 +56,12 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeRoles = this.onChangeRoles.bind(this);
     this.state = {
       username: "",
       email: "",
       password: "",
+      roles: "",
       successful: false,
       message: ""
     };
@@ -70,6 +81,11 @@ export default class Register extends Component {
       password: e.target.value
     });
   }
+  onChangeRoles(e) {
+    this.setState({
+      role: e.target.value
+    });
+  }
   handleRegister(e) {
     e.preventDefault();
     this.setState({
@@ -81,13 +97,15 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        this.state.roles
       ).then(
         response => {
           this.setState({
             message: response.data.message,
             successful: true
           });
+        console.log(response)
         },
         error => {
           const resMessage =
@@ -152,6 +170,17 @@ export default class Register extends Component {
                     value={this.state.password}
                     onChange={this.onChangePassword}
                     validations={[required, vpassword]}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="roles">Enter Role</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="roles"
+                    value={this.state.roles}
+                    onChange={this.onChangeRoles}
+                    validations={[required, vroles]}
                   />
                 </div>
                 <div className="form-group">
