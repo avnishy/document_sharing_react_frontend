@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import DocumentCard from "./DocumentCard";
@@ -11,7 +11,7 @@ export default class ShowDocuments extends Component {
 	  };
 	}
 	componentDidMount(){
-    axios.get('http://localhost:8080/api/document/alldocuments')
+    axios.get('http://localhost:8080/api/document/published')
       .then(res => {
         this.setState({
 			documents: res.data
@@ -25,7 +25,7 @@ render() {
   return (
     <>
       <Container className="justify-content-center p-2">
-        <h1 className="text-center">Show All Documents</h1>
+        <h1 className="text-center">Show All Published Documents</h1>
         <hr />
 
         <Row>

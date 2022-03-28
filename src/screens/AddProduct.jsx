@@ -11,7 +11,7 @@ const AddProduct = ({ history }) => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [published, setPublished] = useState(true)
+    const [published, setPublished] = useState('')
     const [document, setImage] = useState('')
 
     const addProductHandler = async (e) => {

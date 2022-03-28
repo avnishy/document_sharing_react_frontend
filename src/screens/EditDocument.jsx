@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { useHistory, useParams } from 'react-router'
 
-const EditProduct = () => {
+const EditDocument = () => {
 
     const { id } = useParams()
     const history = useHistory()
@@ -11,15 +11,13 @@ const EditProduct = () => {
 
 
     const [title, setTitle] = useState('')
-    const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
-    const [published, setPublished] = useState(true)
+    const [published, setPublished] = useState('false')
 
     useEffect(() => {
         const getDataById = async () => {
-            const {data} = await axios.get(`/api/products/${id}`)
+            const {data} = await axios.get(`/api/document/${id}`)
             setTitle(data.title)
-            setPrice(data.price)
             setDescription(data.description)
             setPublished(data.published)
         }
@@ -35,21 +33,20 @@ const EditProduct = () => {
 
         const data = {
             title: title,
-            price: price,
             description: description,
             published: published
         }
 
-        await axios.put(`/api/products/${id}`, data)
+        await axios.put(`/api/document/${id}`, data)
 
-        history.push('/products')
+        history.push('/rev')
 
    }
 
     return (
         <>
             <Container className='mt-5 p-2'>
-                <h1>Add Product</h1>
+                <h1>Add Document</h1>
                 <hr />
 
                 <Form onSubmit={updateHandler}>
@@ -62,15 +59,7 @@ const EditProduct = () => {
                           />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="price">
-                        <Form.Label>Price ($)</Form.Label>
-                        <Form.Control
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            type="number"
-                             />
-                    </Form.Group>
-
+                    
                     <Form.Group className="mb-3" controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control
@@ -91,7 +80,7 @@ const EditProduct = () => {
 
 
                     <Button variant="primary" type="submit">
-                        Update Product
+                        Update Document
                     </Button>
                 </Form>
             </Container>
@@ -99,4 +88,4 @@ const EditProduct = () => {
     )
 }
 
-export default EditProduct
+export default EditDocument

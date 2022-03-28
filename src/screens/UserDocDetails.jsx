@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import axios from 'axios'
 
 
-const DocumentDetail = () => {
+const UserDocDetails = () => {
 
     const { id } = useParams()
     const history = useHistory()
@@ -54,8 +54,9 @@ const DocumentDetail = () => {
         }
 
         await axios.post(`http://localhost:8080/api/document/addReview/${id}`, review)
+        window.location.reload(true);
 
-        history.push('/user')
+        //history.push(`/userdocument/${id}`)
     }
 
 
@@ -77,18 +78,18 @@ const DocumentDetail = () => {
                                     Description: {documentDescription}
                                 </Card.Text>
                                 <Card.Text>
-                                    {/* Published: {published ? (<small>True</small>) : (<small>false</small>)} */}
+                                    Published: {published ? (<small>True</small>) : (<small>false</small>)}
                                 </Card.Text>
                                 <br />
 
                                 <Button variant="success" href={link}>Download</Button>{' '}
   
 
-                                {/* <Link to={`/document/edit/${id}`}>
+                                <Link to={`/document/edit/${id}`}>
                                     <Button>Edit</Button>
                                 </Link>
 
-                                <Button className="btn btn-danger m-2" onClick={() => handleDelete(id)}>Delete</Button> */}
+                                <Button className="btn btn-danger m-2" onClick={() => handleDelete(id)}>Delete</Button>
 
                             </Card.Body>
                         </Card>
@@ -147,4 +148,4 @@ const DocumentDetail = () => {
     )
 }
 
-export default DocumentDetail
+export default UserDocDetails

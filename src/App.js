@@ -11,8 +11,9 @@ import BoardReviewer from "./components/board-reviewer.component";
 import BoardAdmin from "./components/board-admin.component";
 import { Switch, Route, Link } from "react-router-dom";
 import AddProduct from "./screens/AddProduct";
-import EditProduct from "./screens/EditProduct";
+import EditDocument from "./screens/EditDocument";
 import DocumentDetail from "./screens/DocumentDetail";
+import UserDocDetails from "./screens/UserDocDetails";
 
 class App extends Component {
   constructor(props) {
@@ -52,18 +53,18 @@ class App extends Component {
               </Link>
             </li>
             {showReviewerBoard && (
-            <div className="navbar-nav ml-auto">
+              <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Reviewer Board
-                </Link>
-              </li>
-              <li className="nav-item">
-              <Link to={"/addDocument"} className="nav-link">
-                Add Document
-              </Link>
-            </li>
-            </div>
+                  <Link to={"/rev"} className="nav-link">
+                    My Docs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/addDocument"} className="nav-link">
+                    Add Document
+                  </Link>
+                </li>
+              </div>
             )}
             {showAdminBoard && (
               <div className="navbar-nav ml-auto">
@@ -74,17 +75,17 @@ class App extends Component {
                 </li>
                 <li className="nav-item">
                   <Link to={"/register"} className="nav-link">
-                    Add User
+                    Edit User
                   </Link>
                 </li>
               </div>
             )}
             {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    Dashboard
-                  </Link>
-                </li>
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  Dashboard
+                </Link>
+              </li>
             )}
           </div>
           {currentUser ? (
@@ -107,6 +108,11 @@ class App extends Component {
                   Login
                 </Link>
               </li>
+              <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Signup
+              </Link>
+            </li>
             </div>
           )}
         </nav>
@@ -120,8 +126,9 @@ class App extends Component {
             <Route path="/rev" component={BoardReviewer} />
             <Route path="/admin" component={BoardAdmin} />
             <Route exact path="/addDocument" component={AddProduct} />
-            <Route exact path="/product/edit/:id" component={EditProduct} />
-            <Route exact path="/product/:id" component={DocumentDetail} />
+            <Route exact path="/document/edit/:id" component={EditDocument} />
+            <Route exact path="/document/:id" component={DocumentDetail} />
+            <Route exact path="/userdocument/:id" component={UserDocDetails} />
           </Switch>
         </div>
       </div>
