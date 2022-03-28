@@ -73,11 +73,6 @@ class App extends Component {
                     Admin Board
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
-                    Edit User
-                  </Link>
-                </li>
               </div>
             )}
             {currentUser && (

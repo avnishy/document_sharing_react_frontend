@@ -16,9 +16,9 @@ const UserDocDetails = () => {
     const [published, setPublished] = useState(true)
 
     // review rating  description
-    const [reviews, setReviews] = useState([])
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
+    // const [reviews, setReviews] = useState([])
+    // const [name, setName] = useState('')
+    // const [description, setDescription] = useState('')
 
     useEffect(() => {
 
@@ -30,7 +30,7 @@ const UserDocDetails = () => {
             setDocumentDescription(data.description)
             setPublished(data.published)
             // for reviews
-            setReviews(data.review)
+           // setReviews(data.review)
         }
         getSingleDocumentData()
 
@@ -43,21 +43,21 @@ const UserDocDetails = () => {
         history.push('/user')
     }
     // to add review
-    const addReviewHandler = async (e) => {
+    // const addReviewHandler = async (e) => {
 
-        e.preventDefault()
+    //     e.preventDefault()
 
-        let review = {
-            document_id: id,
-            name: name,
-            description: description
-        }
+    //     let review = {
+    //         document_id: id,
+    //         name: name,
+    //         description: description
+    //     }
 
-        await axios.post(`http://localhost:8080/api/document/addReview/${id}`, review)
-        window.location.reload(true);
+    //     await axios.post(`http://localhost:8080/api/document/addReview/${id}`, review)
+    //     window.location.reload(true);
 
-        //history.push(`/userdocument/${id}`)
-    }
+    //     //history.push(`/userdocument/${id}`)
+    // }
 
 
 
@@ -66,7 +66,7 @@ const UserDocDetails = () => {
         <>
 
             <Container className="mt-10 p-4">
-                <h1 className="text-center">Detail Document</h1>
+                <h1>Detail Document</h1>
                 <hr />
 
                 <Row>
@@ -96,7 +96,7 @@ const UserDocDetails = () => {
                     </Col>
 
 
-                    <Col md={4} lg={4} sm={4}>
+                    {/* <Col md={4} lg={4} sm={4}>
 
                         <h2 className='text-center'>Add Review</h2>
                         <hr />
@@ -140,7 +140,7 @@ const UserDocDetails = () => {
                         ) : (<p> No Comments for this Document </p>)}
 
 
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
 

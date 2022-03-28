@@ -25,7 +25,7 @@ render() {
   return (
     <>
       <Container className="justify-content-center p-2">
-        <h1 className="text-center">Show All Published Documents</h1>
+        <h1 >Show All Published Documents</h1>
         <hr />
 
         <Row>

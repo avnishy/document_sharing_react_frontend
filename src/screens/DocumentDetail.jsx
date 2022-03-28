@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button, Container, Form, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import AuthService from "../services/auth.service";
+
 import { useHistory, useParams } from 'react-router'
 import axios from 'axios'
 
@@ -13,12 +14,12 @@ const DocumentDetail = () => {
     const [title, setTitle] = useState('')
     const [link,setLink] = useState('')
     const [documentDescription, setDocumentDescription] = useState('')
-    const [published, setPublished] = useState(true)
+    //const [published, setPublished] = useState(true)
 
     // review rating  description
     const [reviews, setReviews] = useState([])
-    const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    const [userName, setDocumentUserName] = useState('')
 
     useEffect(() => {
 
@@ -28,8 +29,9 @@ const DocumentDetail = () => {
             setTitle(data.title)
             setLink(data.linkurl)
             setDocumentDescription(data.description)
-            setPublished(data.published)
-            // for reviews
+            setDocumentUserName(data.userName)
+            // setPublished(data.published)
+            // // for reviews
             setReviews(data.review)
         }
         getSingleDocumentData()
@@ -46,26 +48,24 @@ const DocumentDetail = () => {
     const addReviewHandler = async (e) => {
 
         e.preventDefault()
+        const user=  AuthService.getCurrentUser();
+        const username = user.username;
 
         let review = {
             document_id: id,
-            name: name,
+            name: username,
             description: description
         }
 
         await axios.post(`http://localhost:8080/api/document/addReview/${id}`, review)
 
-        history.push('/user')
+        window.location.reload(true);
     }
-
-
-
-
     return (
         <>
 
             <Container className="mt-10 p-4">
-                <h1 className="text-center">Detail Document</h1>
+                <h1>Detail Document</h1>
                 <hr />
 
                 <Row>
@@ -73,13 +73,10 @@ const DocumentDetail = () => {
                         <Card className='shadow-lg m-3 p-2 rounded'>
                             <Card.Body>
                                 <Card.Title>Title: {title}</Card.Title>
+                                <Card.Title>Author: {userName}</Card.Title>
                                 <Card.Text>
                                     Description: {documentDescription}
                                 </Card.Text>
-                                <Card.Text>
-                                    {/* Published: {published ? (<small>True</small>) : (<small>false</small>)} */}
-                                </Card.Text>
-                                <br />
 
                                 <Button variant="success" href={link}>Download</Button>{' '}
   
@@ -101,23 +98,13 @@ const DocumentDetail = () => {
                         <hr />
 
                         <Form onSubmit={addReviewHandler}>
-                            <Form.Group className="mb-3" controlId="name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    type="text"
-                                />
-                            </Form.Group>
-
-
-
-                            <Form.Group className="mb-3" controlId="description">
-                                <Form.Label>Description</Form.Label>
+                        <Form.Group className="mb-3" controlId="description">
+                                <Form.Label>Comment</Form.Label>
                                 <Form.Control
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     as="textarea"
+                                    required='true'
                                 />
                             </Form.Group>
 
@@ -134,7 +121,7 @@ const DocumentDetail = () => {
 
                         {reviews.length > 0 ? (
                             reviews.map(review => {
-                                return <p key={review.id}>Name: {review.name} <br /> {review.description}</p>
+                                return <p key={review.id}><b>{review.name} :</b><></> {review.description}</p>
                             })
                         ) : (<p> No Comments for this Document </p>)}
 
