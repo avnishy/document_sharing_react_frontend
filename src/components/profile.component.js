@@ -10,7 +10,7 @@ export default class Profile extends Component {
   render() {
     const { currentUser } = this.state;
     return (
-      <div className="container">
+      <div className="container ">
         <header className="jumbotron">
           <h3>
             <strong>{currentUser.username}</strong> Profile
@@ -26,14 +26,18 @@ export default class Profile extends Component {
           {currentUser.id}
         </p>
         <p>
+          <strong>User Name:</strong>{" "}
+          {currentUser.username}
+        </p>
+        <p>
           <strong>Email:</strong>{" "}
           {currentUser.email}
         </p>
-        <strong>Authorities:</strong>
+        {/* <strong>Authorities:</strong>
         <ul>
           {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul>
+            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)} 
+        </ul> */}
       </div>
     );
   }

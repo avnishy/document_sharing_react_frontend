@@ -27,3 +27,18 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+.fa {
+  padding: 10px;
+  font-size: 25px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+.allignLeft {
+  text-align: right;
+}

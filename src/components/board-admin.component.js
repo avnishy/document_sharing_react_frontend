@@ -29,7 +29,8 @@ export default class BoardAdmin extends Component {
   
     render() {
       return (
-        <Container className="justify-content-center p-2">
+        <div className="shadow-lg m-3 p-2 rounded">
+        <Container className="justify-content-center p-2 ">
         <h1 >Registered User</h1>
         <div className="table-wrapper">
         <Table striped bordered hover>
@@ -46,6 +47,7 @@ export default class BoardAdmin extends Component {
           </tbody>
         </Table>
       </div>
-      </Container>);
+      </Container>
+      </div>);
     }
   }

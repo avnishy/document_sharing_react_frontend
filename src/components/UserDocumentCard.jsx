@@ -12,7 +12,7 @@ const UserDocumentCard = ({ document }) => {
                     <Card.Title>Title: {document.title}</Card.Title>
                     <Card.Title>ID:{document.id}</Card.Title>
                     <Card.Text>
-                        Description: {document.description.slice(0,20)}...
+                        Description: {document.description.slice(0,15)}...
                     </Card.Text>
                  
                     <Link to={`userdocument/${document.id}`}>

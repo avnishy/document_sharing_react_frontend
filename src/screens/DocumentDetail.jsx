@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Container, Form, Row, Col } from 'react-bootstrap'
 import AuthService from "../services/auth.service";
 
-import { useHistory, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import axios from 'axios'
 
 
 const DocumentDetail = () => {
 
     const { id } = useParams()
-    const history = useHistory()
-
+   
     const [title, setTitle] = useState('')
     const [link,setLink] = useState('')
     const [documentDescription, setDocumentDescription] = useState('')
-    //const [published, setPublished] = useState(true)
-
+   
     // review rating  description
     const [reviews, setReviews] = useState([])
     const [description, setDescription] = useState('')
@@ -30,20 +28,12 @@ const DocumentDetail = () => {
             setLink(data.linkurl)
             setDocumentDescription(data.description)
             setDocumentUserName(data.userName)
-            // setPublished(data.published)
-            // // for reviews
             setReviews(data.review)
         }
         getSingleDocumentData()
 
     }, [id])
 
-    // handling Delete
-
-    const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:8080/api/document/${id}`)
-        history.push('/user')
-    }
     // to add review
     const addReviewHandler = async (e) => {
 
@@ -79,13 +69,6 @@ const DocumentDetail = () => {
                                 </Card.Text>
 
                                 <Button variant="success" href={link}>Download</Button>{' '}
-  
-
-                                {/* <Link to={`/document/edit/${id}`}>
-                                    <Button>Edit</Button>
-                                </Link>
-
-                                <Button className="btn btn-danger m-2" onClick={() => handleDelete(id)}>Delete</Button> */}
 
                             </Card.Body>
                         </Card>

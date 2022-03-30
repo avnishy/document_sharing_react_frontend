@@ -27,13 +27,13 @@ const AddProduct = ({ history }) => {
         formData.append('description', description)
         formData.append('published', published)
         await axios.post(API_URL + `adddocument/${userID}`, formData)
-        history.push('/user')
+        history.push('/rev')
     }
 
 
     return (
         <>
-            <Container className='mt-5 p-2'>
+            <Container className='mt-5 p-5 shadow-lg bg-light rounded '>
                 <h1>Add Product</h1>
                 <hr />
 
