@@ -42,3 +42,8 @@ label {
 .allignLeft {
   text-align: right;
 }
+.navbar{
+  padding-left: 20px;
+  background-image: linear-gradient(rgb(57, 3, 3), rgb(33, 83, 81));
+  padding: 0%;
+  }
