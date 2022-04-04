@@ -47,3 +47,13 @@ label {
   background-image: linear-gradient(rgb(57, 3, 3), rgb(33, 83, 81));
   padding: 0%;
   }
+  .wrapper {
+    padding: 100px;
+  }
+  
+  .image--cover {
+    border-radius: 50%;
+  
+    object-fit: cover;
+    object-position: center right;
+  }
