@@ -15,6 +15,7 @@ import AddProduct from "./screens/AddProduct";
 import EditDocument from "./screens/EditDocument";
 import DocumentDetail from "./screens/DocumentDetail";
 import UserDocDetails from "./screens/UserDocDetails";
+import NotFound from "./components/NotFound";
 
 class App extends Component {
   constructor(props) {
@@ -137,6 +138,8 @@ class App extends Component {
             <Route exact path="/document/edit/:id" component={EditDocument} />
             <Route exact path="/document/:id" component={DocumentDetail} />
             <Route exact path="/userdocument/:id" component={UserDocDetails} />
+            <Route exact path="*" component={NotFound}/>
+            
           </Switch>
         </div>
       </div>

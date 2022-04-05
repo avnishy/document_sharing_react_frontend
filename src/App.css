@@ -57,3 +57,10 @@ label {
     object-fit: cover;
     object-position: center right;
   }
+
+  .allignCenter {
+    padding: 20px 25px 30px;
+
+    margin-top: 60px;
+    text-align: center;
+  }
